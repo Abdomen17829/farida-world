@@ -1,0 +1,4 @@
+﻿node_modules/
+fw-site.zip
+deploy.cmd
+*.log

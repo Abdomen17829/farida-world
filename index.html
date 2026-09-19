@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="theme-color" content="#03050c">
+
+<title>Farida World 🌙</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+<!-- ===================== AMBIENCE (behind start screen) ===================== -->
+
+<div class="ambience"></div>
+
+<div class="grain"></div>
+
+<div class="vignette"></div>
+
+
+<!-- ===================== START ===================== -->
+
+<section class="start" id="start">
+
+    <div class="start-inner">
+
+        <div class="start-kicker kicker">
+            HAPPY BIRTHDAY
+        </div>
+
+        <h1 class="wordmark">
+
+            <span class="wm-word gold-text">FARIDA</span>
+
+            <span class="wm-word">WORLD</span>
+
+        </h1>
+
+        <div class="bday-line">
+            عيد ميلاد سعيد يا <span class="gold-text">فريدة</span> 🎂
+        </div>
+
+        <p class="tagline">
+            الليلة دي معمولة علشانك.. رحلة بين النجوم لحد كوكبك 🌙✨
+        </p>
+
+
+        <!-- floating birthday ornament (no image) -->
+
+        <div class="start-ornament" aria-hidden="true">
+
+            <div class="ornament-ring"></div>
+
+            <div class="ornament-ring r2"></div>
+
+            <div class="ornament-cake">🎂</div>
+
+            <span class="ornament-star s1">✦</span>
+
+            <span class="ornament-star s2">✦</span>
+
+            <span class="ornament-star s3">✧</span>
+
+        </div>
+
+
+        <button
+            class="btn-enter"
+            onclick="startJourney()">
+
+            ابدأ الرحلة ✦
+
+        </button>
+
+        <div class="scroll-hint">
+            استني شوية وكل حاجة هتبان ✦
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================== INTRO ===================== -->
+
+<div class="intro" id="intro">
+
+    <div class="intro-box gold-frame">
+
+        <div class="intro-crest">
+            🌙
+        </div>
+
+        <h2>
+            دي ليلتك يا فريدة 🎂❤️
+        </h2>
+
+        <p>
+            هنجوب في الفضاء لحد ما نوصل كوكبك،
+            وكل جزيرة هناك مخبية حاجة معمولة مخصوص
+            علشان عيد ميلادك،
+            وفي الآخر في مفاجأة مستنياكي 🥹💗
+        </p>
+
+        <button
+            class="btn-go"
+            onclick="enterWorld()">
+
+            يلا نطير ✨
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ===================== 3D WORLD ===================== -->
+
+<div id="sceneWrap">
+
+    <canvas id="sceneCanvas"></canvas>
+
+    <div id="css3d"></div>
+
+    <div id="diveFade"></div>
+
+
+    <!-- loading gate -->
+
+    <div id="sceneLoader">
+
+        <div class="loader-orb"></div>
+
+        <p>جاري تجهيز العالم...</p>
+
+    </div>
+
+
+    <!-- HUD -->
+
+    <div id="sceneHud">
+
+        <button id="skipBtn">تخطّي المشهد ←</button>
+
+        <div id="scenePrompt">اختاري جزيرتك ✦</div>
+
+        <div class="progress scene-progress">
+
+            <span class="progress-label" id="progressLabel">
+                0 / 7
+            </span>
+
+            <div class="progress-track">
+
+                <div class="progress-fill" id="progressFill"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- island dock: content panels live here (reliable DOM overlay) -->
+
+    <div id="islandDock">
+
+        <div class="dock-scrim"></div>
+
+        <div class="dock-card">
+
+            <header class="dock-head">
+
+                <button class="dock-nav" id="dockPrev" title="الجزيرة السابقة" aria-label="الجزيرة السابقة">▶</button>
+
+                <div class="dock-chip">
+
+                    <span class="dock-chip-emoji" id="dockEmoji"></span>
+
+                    <span id="dockName">—</span>
+
+                </div>
+
+                <button class="dock-nav" id="dockNext" title="الجزيرة التالية" aria-label="الجزيرة التالية">◀</button>
+
+            </header>
+
+            <div class="dock-content"></div>
+
+            <footer class="dock-foot">
+
+                <span>
+                    اللي جاية: <b id="dockNextName">—</b>
+                </span>
+
+                <button class="dock-close" id="dockClose">إغلاق ✕</button>
+
+            </footer>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===================== ISLAND CONTENT (kept inside hidden windows) ===================== -->
+
+<!-- BEGINNING -->
+
+<div class="window" id="beginning">
+
+    <div class="box gold-frame">
+
+        <button class="close" aria-label="إغلاق">×</button>
+
+        <h2 class="title">
+            البداية 🌙
+        </h2>
+
+        <p class="subtitle">
+            ومن هنا بدأت الحكاية ❤️
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="message rise">
+
+            <div class="heart-orb">
+                ✨
+            </div>
+
+            <p class="type-static">
+                كل حكاية حلوة بيكون ليها بداية،
+                والبداية دي كانت من أحلى الحاجات ✨
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MUSIC -->
+
+<div class="window" id="music">
+
+    <div class="box gold-frame">
+
+        <button class="close" aria-label="إغلاق">×</button>
+
+        <h2 class="title">
+            أغانيك 🎧🎶
+        </h2>
+
+        <p class="subtitle">
+            شوية أغاني ليها مكان خاص 🎵❤️
+        </p>
+
+        <div class="divider"></div>
+
+
+        <!-- premium player -->
+
+        <div class="player gold-frame rise" id="player">
+
+            <canvas class="player-viz" id="vizCanvas"></canvas>
+
+            <div class="player-meta">
+
+                <span class="player-now">NOW PLAYING</span>
+
+                <span class="eq-pill" aria-hidden="true">
+                    <i></i><i></i><i></i><i></i>
+                </span>
+
+            </div>
+
+            <h3 id="currentSongTitle">
+                بدي دوب
+            </h3>
+
+            <p class="artist" id="currentSongArtist">
+                إليسا • الأغنية الأساسية
+            </p>
+
+
+            <!-- seek -->
+
+            <div class="seek" id="seek" role="slider" aria-label="التقدم">
+
+                <div class="seek-track">
+
+                    <div class="seek-fill" id="seekFill"></div>
+
+                    <div class="seek-thumb" id="seekThumb"></div>
+
+                </div>
+
+            </div>
+
+            <div class="time-row">
+
+                <span id="timeCurrent">0:00</span>
+
+                <span id="timeTotal">0:00</span>
+
+            </div>
+
+
+            <!-- controls -->
+
+            <div class="player-controls">
+
+                <button
+                    class="p-btn"
+                    id="btnPrev"
+                    aria-label="السابق">⏮</button>
+
+                <button
+                    class="p-btn main"
+                    id="btnPlay"
+                    aria-label="تشغيل / إيقاف">▶</button>
+
+                <button
+                    class="p-btn"
+                    id="btnNext"
+                    aria-label="التالي">⏭</button>
+
+            </div>
+
+        </div>
+
+
+        <!-- song list -->
+
+        <div class="song-list" id="songList">
+
+            <div class="song rise" data-song="elissa1">
+
+                <div class="song-icon">🎶</div>
+
+                <div class="song-info">
+
+                    <h3>أغنية إليسا</h3>
+
+                    <p>Elissa</p>
+
+                </div>
+
+                <span class="song-state"></span>
+
+                <button class="song-play" aria-label="تشغيل">▶</button>
+
+            </div>
+
+            <div class="song rise" data-song="elissa2">
+
+                <div class="song-icon">🎶</div>
+
+                <div class="song-info">
+
+                    <h3>أغنية إليسا</h3>
+
+                    <p>Elissa</p>
+
+                </div>
+
+                <span class="song-state"></span>
+
+                <button class="song-play" aria-label="تشغيل">▶</button>
+
+            </div>
+
+            <div class="song rise" data-song="haifa">
+
+                <div class="song-icon">💗</div>
+
+                <div class="song-info">
+
+                    <h3>أغنية هيفاء وهبي</h3>
+
+                    <p>Haifa Wehbe</p>
+
+                </div>
+
+                <span class="song-state"></span>
+
+                <button class="song-play" aria-label="تشغيل">▶</button>
+
+            </div>
+
+            <div class="song rise" data-song="hamo">
+
+                <div class="song-icon">❤️</div>
+
+                <div class="song-info">
+
+                    <h3>طب ب بحبك</h3>
+
+                    <p>حمو المرشدي</p>
+
+                </div>
+
+                <span class="song-state"></span>
+
+                <button class="song-play" aria-label="تشغيل">▶</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- LOVES -->
+
+<div class="window" id="loves">
+
+    <div class="box gold-frame">
+
+        <button class="close" aria-label="إغلاق">×</button>
+
+        <h2 class="title">
+            الحاجات اللي بتحبيها 🌷
+        </h2>
+
+        <p class="subtitle">
+            تفاصيل صغيرة بس بتفرق ❤️
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="cards">
+
+            <div class="card rise">
+
+                <div class="card-icon">🎧</div>
+
+                <h3>الأغاني</h3>
+
+                <p>
+                    الأغاني اللي بتحبي تسمعيها 🎶
+                </p>
+
+            </div>
+
+            <div class="card rise">
+
+                <div class="card-icon">🌸</div>
+
+                <h3>الحاجات الحلوة</h3>
+
+                <p>
+                    الحاجات الصغيرة اللي بتفرحك ✨
+                </p>
+
+            </div>
+
+            <div class="card rise">
+
+                <div class="card-icon">🌙</div>
+
+                <h3>الليل</h3>
+
+                <p>
+                    هدوء الليل واللحظات الهادية ❤️
+                </p>
+
+            </div>
+
+            <div class="card rise">
+
+                <div class="card-icon">💗</div>
+
+                <h3>التفاصيل</h3>
+
+                <p>
+                    التفاصيل الصغيرة اللي بتخلي كل حاجة أحلى ✨
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- BIRTHDAY -->
+
+<div class="window" id="birthday">
+
+    <div class="box gold-frame">
+
+        <button class="close" aria-label="إغلاق">×</button>
+
+        <h2 class="title">
+            مستنيين يومك 🎂❤️
+        </h2>
+
+        <p class="subtitle">
+            السبت 19 سبتمبر الساعة 8:30 بالليل ✨
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="countdown">
+
+            <div class="time rise">
+
+                <strong id="days">00</strong>
+
+                <span>يوم</span>
+
+            </div>
+
+            <div class="time rise">
+
+                <strong id="hours">00</strong>
+
+                <span>ساعة</span>
+
+            </div>
+
+            <div class="time rise">
+
+                <strong id="minutes">00</strong>
+
+                <span>دقيقة</span>
+
+            </div>
+
+            <div class="time rise">
+
+                <strong id="seconds">00</strong>
+
+                <span>ثانية</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MEMORIES -->
+
+<div class="window" id="memories">
+
+    <div class="box gold-frame">
+
+        <button class="close" aria-label="إغلاق">×</button>
+
+        <h2 class="title">
+            لحظاتنا 🌷
+        </h2>
+
+        <p class="subtitle">
+            حاجات صغيرة بس مستحيل تتنسي ❤️
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="cards">
+
+            <div class="card rise">
+
+                <div class="card-icon">🌸</div>
+
+                <h3>أول حكاية</h3>
+
+                <p>
+                    أول حاجة خلت الحكاية تبدأ 🥹❤️
+                </p>
+
+            </div>
+
+            <div class="card rise">
+
+                <div class="card-icon">😂</div>
+
+                <h3>موقف ضحكنا فيه</h3>
+
+                <p>
+                    الموقف اللي كل ما نفتكره نضحك 😂
+                </p>
+
+            </div>
+
+            <div class="card rise">
+
+                <div class="card-icon">🌙</div>
+
+                <h3>لحظة مميزة</h3>
+
+                <p>
+                    لحظة بسيطة بس فضلت في القلب ✨
+                </p>
+
+            </div>
+
+            <div class="card rise">
+
+                <div class="card-icon">💗</div>
+
+                <h3>ولسه في كتير</h3>
+
+                <p>
+                    أحلى الذكريات لسه مبدأتش 🫶
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MESSAGE -->
+
+<div class="window" id="message">
+
+    <div class="box gold-frame">
+
+        <button class="close" aria-label="إغلاق">×</button>
+
+        <h2 class="title">
+            رسالة ليكي 💌
+        </h2>
+
+        <p class="subtitle">
+            اتكتبت حرف حرف علشانك ✦
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="message">
+
+            <div class="heart-orb">
+                ❤️
+            </div>
+
+            <p class="type-text"></p>
+
+            <div class="type-skip">
+                اضغطي في أي مكان لتخطي الكتابة ←
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SURPRISE -->
+
+<div class="window" id="surprise">
+
+    <div class="box gold-frame">
+
+        <button class="close" aria-label="إغلاق">×</button>
+
+        <div class="surprise">
+
+            <div class="gift-orb">
+                🎁
+            </div>
+
+            <h2>
+                في حاجة مستنياكي 👀❤️
+            </h2>
+
+            <p class="type-text"></p>
+
+            <div class="type-skip">
+                اضغطي في أي مكان لتخطي الكتابة ←
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===================== AUDIO + FX ===================== -->
+
+<audio id="mainAudio" preload="auto"></audio>
+
+<canvas id="confettiCanvas"></canvas>
+
+<div class="toast" id="toast"></div>
+
+
+<!-- ===================== SCRIPTS ===================== -->
+
+<script src="js/three.min.js"></script>
+
+<script src="js/CSS3DRenderer.js"></script>
+
+<script src="js/gsap.min.js"></script>
+
+<script src="js/scene.js"></script>
+
+<script src="js/main.js"></script>
+
+</body>
+
+</html>
